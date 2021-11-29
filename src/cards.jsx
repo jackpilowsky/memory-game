@@ -15,7 +15,7 @@ function shuffle(array) {
     let currentIndex = array.length,  randomIndex;
   
     // While there remain elements to shuffle...
-    while (currentIndex != 0) {
+    while (currentIndex !== 0) {
   
       // Pick a remaining element...
       randomIndex = Math.floor(Math.random() * currentIndex);
@@ -30,25 +30,29 @@ function shuffle(array) {
   }
 
 let icons = [
-<AcUnitIcon />,
- <AccessTimeFilledIcon />,
- <AddBoxIcon/>,
- <AddAlertIcon/>,
- <AirportShuttleIcon/>,
- <AnchorIcon/>,
- <AttachMoneyIcon/>,
- <CampaignIcon/>,
- <ChangeHistoryIcon/>,
- <ChurchIcon/>,
- <CreateIcon/>,
- <ContentCutIcon/>
+<AcUnitIcon  fontSize="inherit" sx={{width: '5rem', height: '5rem'}} />,
+ <AccessTimeFilledIcon  fontSize="inherit" sx={{width: '5rem', height: '5rem'}} />,
+ <AddBoxIcon fontSize="inherit" sx={{width: '5rem', height: '5rem'}} />,
+ <AddAlertIcon fontSize="inherit" sx={{width: '5rem', height: '5rem'}} />,
+ <AirportShuttleIcon fontSize="inherit" sx={{width: '5rem', height: '5rem'}} />,
+ <AnchorIcon fontSize="inherit" sx={{width: '5rem', height: '5rem'}} />,
+ <AttachMoneyIcon fontSize="inherit" sx={{width: '5rem', height: '5rem'}} />,
+ <CampaignIcon fontSize="inherit" sx={{width: '5rem', height: '5rem'}} />,
+ <ChangeHistoryIcon fontSize="inherit" sx={{width: '5rem', height: '5rem'}} />,
+ <ChurchIcon fontSize="inherit" sx={{width: '5rem', height: '5rem'}} />,
+ <CreateIcon fontSize="inherit" sx={{width: '5rem', height: '5rem'}} />,
+ <ContentCutIcon fontSize="inherit" sx={{width: '5rem', height: '5rem'}} />
 ]
 
 // double the cards and shuffle them
-export default shuffle(icons.concat(icons).map(icon=>{
+export default function getCards(){
+  let cards = icons.map((icon, i)=>{
     return {
         icon,
-        visible: true, 
-        selected: false
+        visible: false, 
+        selected: false,
+        id: i
     }
-}))
+  })
+  return shuffle(cards.concat([...cards]))
+}

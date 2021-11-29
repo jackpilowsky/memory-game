@@ -7,6 +7,9 @@ import Button from '@mui/material/Button';
 
 
 export default function Header(props) {
+    const {
+        restart
+    } = props
     return (
       <Box sx={{ 
           flexGrow: 1,
@@ -17,7 +20,7 @@ export default function Header(props) {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Memory Game
             </Typography>
-            <Button color="inherit">Start Over</Button>
+            <Button color="inherit" onClick={restart}>Start Over</Button>
           </Toolbar>
         </AppBar>
       </Box>
