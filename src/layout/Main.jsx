@@ -17,17 +17,19 @@ export default function Main(props){
                     cards.map((card, i)=>{
                         return  (
                             <Grid key={i} item xs={2} >
-                                <Card variant="outlined" onClick={()=>handleClick(i)} sx={{paddingTop: 5, paddingBottom: 5}}>
-                                    {card.faceUp && card.icon}
-                                    {!card.faceUp && 
-                                        <Typography as="p" sx={{
-                                            padding: '30px',
-                                            color: (disabled ? '#999' : '#000')
-                                        }}>
-                                            Click to select
-                                        </Typography>
-                                    }
-                                </Card>
+                                {!card.isMatched &&
+                                    <Card variant="outlined" onClick={()=>handleClick(i)} sx={{paddingTop: 5, paddingBottom: 5}}>
+                                        {card.faceUp && card.icon}
+                                        {!card.faceUp && 
+                                            <Typography as="p" sx={{
+                                                padding: '30px',
+                                                color: (disabled ? '#999' : '#000')
+                                            }}>
+                                                Click to select
+                                            </Typography>
+                                        }
+                                    </Card>
+                                }
                             </Grid>
                         )
                     })

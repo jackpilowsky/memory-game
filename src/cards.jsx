@@ -50,9 +50,9 @@ export default function getCards(){
   let cards = icons.map((icon, i)=>{
     return {
         icon,
-        faceUp: false, 
-        selected: false,
-        id: i
+        faceUp: false,
+        id: i,
+        isMatched: false
     }
   })
   return shuffle(cards.concat(_.cloneDeep(cards)))

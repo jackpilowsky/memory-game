@@ -25,7 +25,15 @@ function App() {
     if(selectedCard){
       if(selectedCard.id === clonedCards[i].id){
         // user selected correctly
-        setSelectedCard(null)
+        setDisabled(true)
+        setTimeout(()=>{
+          // show both cards for 1 second and then make them disappear
+          clonedCards[i].isMatched = true
+          selectedCard.isMatched = true
+          setSelectedCard(null)
+          setCards(clonedCards)
+          setDisabled(false)
+        }, 1000)
       }else{
         // user selects incorrectly
         setDisabled(true)
