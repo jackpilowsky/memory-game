@@ -44,7 +44,7 @@ function App() {
           setSelectedCard(null)
           setCards(clonedCards)
           setDisabled(false)
-        }, 3000)
+        }, 2000)
       }
     }else{ 
       // there is no selected card, so the clicked card becomes the selected card

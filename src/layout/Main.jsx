@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography, Grid, Box } from '@mui/material';
+import { Typography, Grid, Box, Card, Fade } from '@mui/material';
 import styled from 'styled-components';
 
 const StyledBox = styled(Box, {
@@ -24,6 +24,8 @@ const cardFaceStyles = {
     backfaceVisibility: 'hidden',
     border: '1px solid #f1f1f1'
 }
+
+
   
 
 export default function Main(props){
@@ -39,7 +41,7 @@ export default function Main(props){
                     cards.map((card, i)=>{
                         return  (
                             <Grid key={i} item xs={2} >
-                                {!card.isMatched &&
+                                <Fade in={!card.isMatched} timeout={1000}>
                                     <Box onClick={()=>handleClick(i)}
                                         sx={{
                                             backgroundColor: 'transparent',
@@ -47,26 +49,25 @@ export default function Main(props){
                                             height: 200
                                         }}>
                                         <StyledBox flipped={(card.faceUp ? 'flipped' : '')}>
-                                            <Box sx={cardFaceStyles}>
+                                            <Card sx={cardFaceStyles}>
                                                 <Typography as="p" sx={{
                                                     padding: '88px 0',
                                                     color: (disabled ? '#999' : '#000')
                                                 }}>
                                                     Click to select
                                                 </Typography>
-                                            </Box>
-                                            <Box sx={{
+                                            </Card>
+                                            <Card sx={{
                                                 ...cardFaceStyles,
                                                 transform: 'rotateY(180deg)',
                                                 paddingTop: '52px',
                                                 height: 'calc(100% - 52px)'
                                             }}>
                                                 {card.icon}
-                                            </Box>
+                                            </Card>
                                         </StyledBox>
                                     </Box>
-                                    
-                                }
+                                </Fade>
                             </Grid>
                         )
                     })
