@@ -1,7 +1,30 @@
 import React from 'react'
-import Grid from '@mui/material/Grid';
-import Card from '@mui/material/Card';
-import { Typography } from '@mui/material';
+import { Typography, Grid, Box } from '@mui/material';
+import styled from 'styled-components';
+
+const StyledBox = styled(Box, {
+    shouldForwardProp: (prop) => prop !== 'flipped',
+  })(({ flipped, theme }) => ({
+    position: 'relative',
+    width: '100%',
+    height: '100%',
+    textAlign: 'center',
+    transition: 'transform 0.8s',
+    transformStyle: 'preserve-3d',
+    ...(flipped && {
+        transform: 'rotateY(180deg)'
+    }),
+}));
+
+
+const cardFaceStyles = {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    backfaceVisibility: 'hidden',
+    border: '1px solid #f1f1f1'
+}
+  
 
 export default function Main(props){
     const {
@@ -9,7 +32,6 @@ export default function Main(props){
         disabled, 
         handleClick
     } = props
-
     return (
         <main style={{maxWidth: 1200, margin: '0 auto' }}>
             <Grid container spacing={2}>
@@ -18,17 +40,32 @@ export default function Main(props){
                         return  (
                             <Grid key={i} item xs={2} >
                                 {!card.isMatched &&
-                                    <Card variant="outlined" onClick={()=>handleClick(i)} sx={{paddingTop: 5, paddingBottom: 5}}>
-                                        {card.faceUp && card.icon}
-                                        {!card.faceUp && 
-                                            <Typography as="p" sx={{
-                                                padding: '30px',
-                                                color: (disabled ? '#999' : '#000')
+                                    <Box onClick={()=>handleClick(i)}
+                                        sx={{
+                                            backgroundColor: 'transparent',
+                                            perspective: 1000,
+                                            height: 200
+                                        }}>
+                                        <StyledBox flipped={(card.faceUp ? 'flipped' : '')}>
+                                            <Box sx={cardFaceStyles}>
+                                                <Typography as="p" sx={{
+                                                    padding: '88px 0',
+                                                    color: (disabled ? '#999' : '#000')
+                                                }}>
+                                                    Click to select
+                                                </Typography>
+                                            </Box>
+                                            <Box sx={{
+                                                ...cardFaceStyles,
+                                                transform: 'rotateY(180deg)',
+                                                paddingTop: '52px',
+                                                height: 'calc(100% - 52px)'
                                             }}>
-                                                Click to select
-                                            </Typography>
-                                        }
-                                    </Card>
+                                                {card.icon}
+                                            </Box>
+                                        </StyledBox>
+                                    </Box>
+                                    
                                 }
                             </Grid>
                         )
